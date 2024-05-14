@@ -16,6 +16,9 @@ if [ -e $pid ]; then
       {%- endif -%}
       {{ ' ' }}Please repair the restic-{{ item.name | replace(' ', '') }} job."
     {% endif %}
+    {% if item.monitoring_call_failure is defined %}
+    {{ item.monitoring_call_failure }}
+    {% endif %}
    exit # pid file exists, another instance is running, so now we politely exit
 else
     echo $$ > $pid # pid file doesn't exit, create one and go on
@@ -243,6 +246,9 @@ else
       {%- endif -%}
       {{ ' ' }}Please repair the restic-{{ item.name | replace(' ', '') }} job."
     {% endif %}
+    {% if item.monitoring_call_failure is defined %}
+    {{ item.monitoring_call_failure }}
+    {% endif %}
 fi
 {% endif %}
 
@@ -288,7 +294,10 @@ case $? in
         {{ ' ' }}We tried to backup '{{ item.src }}'.
       {%- endif -%}
       {{ ' ' }}Please repair the restic-{{ item.name | replace(' ', '') }} job."
-{% endif %}
+    {% endif %}
+    {% if item.monitoring_call_failure is defined %}
+    {{ item.monitoring_call_failure }}
+    {% endif %}
 esac
 
 {% if item.lvm is defined %}
@@ -314,6 +323,9 @@ else
         {{ ' ' }}We tried to backup '{{ item.src }}'.
       {%- endif -%}
       {{ ' ' }}Please repair the restic-{{ item.name | replace(' ', '') }} job."
+    {% endif %}
+    {% if item.monitoring_call_failure is defined %}
+    {{ item.monitoring_call_failure }}
     {% endif %}
 fi
 rm -f $pid # remove pid file just before exiting

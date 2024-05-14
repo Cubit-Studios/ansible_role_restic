@@ -185,6 +185,7 @@ Available variables:
 | `mail_on_error`    |           no                  | Optionally send a mail if the backupjob will fail *(mailx is required)* |
 | `mail_address`     |  if `mail_on_error` is true   | The mail addressto recive mails if you enabled ``mail_on_error``. |
 | `monitoring_call`  |           no                  | A command that will be called if the backup is *successful*. Useful for heartbeat monitoring systems that warn when no heartbeat is received. Use the full command, you need to run. Example: `curl https://monitoring.example.com/api/push/E9Wzm4lJ2O?status=up&msg=OK&ping=` |
+| `monitoring_call_failure`  |           no          | A command that will be called if the backup is *not successful*. Use the full command, you need to run. Example: `curl https://monitoring.example.com/api/push/E9Wzm4lJ2O?status=up&msg=OK&ping=` |
 | `niceness`         |           no                  | If set, runs any scheduled backup with given [niceness-value](https://en.wikipedia.org/wiki/Nice_(Unix)). On Linux -20 is highest priority, 0 default and 19 is lowest priority. 10 is a common low priority assigned to backup routines on production systems. |
 
 Example:
